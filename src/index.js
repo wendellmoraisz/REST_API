@@ -11,9 +11,9 @@ const setUser = require("./routes/users/setUser");
 const setMessages = require("./routes/messages/setMessages")
 const getMessages = require("./routes/messages/getMessages");
 
-app.use("/user", setUser);
+app.post("/user", setUser);
 app.use("/users", getUsers);
-app.use("/messages", setMessages);
+app.post("/messages", setMessages);
 app.use("/messages", getMessages);
 
 // agendamento da atualização dos dados no banco

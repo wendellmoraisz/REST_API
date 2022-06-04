@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../../db");
 const app = express();
 
-app.post("/messages", (req, res) => {
+router.post("/messages", (req, res) => {
     try {
         req.body.messages.map((message, index) => {
             db.insertMessage({

@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const db = require("../../db");
 const { body, validationResult } = require("express-validator");
-const app = express();
 
 router.post("/user", [
     body("name").isEmail(), // verificação do email
