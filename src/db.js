@@ -41,6 +41,7 @@ async function updateSubscription() {
     const messages = await selectTable('message_flow');
     const users = await selectTable('subscriptions');
 
+    console.log('Updating subscriptions...');
     users.map(user => {
         if (user.last_message === messages.length) {
             conn.query(`UPDATE subscriptions SET active = false WHERE id = ${user.id}`);
@@ -48,6 +49,7 @@ async function updateSubscription() {
             conn.query(`UPDATE subscriptions SET last_message = ${user.last_message + 1} WHERE id = ${user.id}`);
         };
     });
+    console.log("Subscriptions successfully updated");
 };
 
 module.exports = { selectTable, insertMessage, insertSubscription, updateSubscription };

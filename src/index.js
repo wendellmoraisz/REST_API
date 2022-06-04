@@ -1,12 +1,11 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const bodyParser = require("body-parser");
-const db = require("./db/db");
-const msg = require("./messages");
+const db = require("./db");
 const schedule = require("node-schedule");
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // agendamento da atualização dos dados no banco
@@ -31,7 +30,39 @@ app.post("/user", [
             last_message: null,
             active: true,
         });
-        res.json({ message: "successful registration" });
+        res.json({ status: 200, message: "successful registration" });
+    } catch (e) {
+        res.json({ error: e.message });
+    };
+});
+
+app.post("/messages", (req, res) => {
+    try {
+        req.body.messages.map((message, index) => {
+            db.insertMessage({
+                template_name: message.template_name,
+                position: index + 1,
+            });
+        });
+        res.json({ status: 200, message: "messages registered successfully" })
+    } catch (e) {
+        res.json({ error: e.message });
+    };
+});
+
+app.get("/users", async (req, res) => {
+    try {
+        const response = await db.selectTable("subscriptions");
+        res.send(response);
+    } catch (e) {
+        res.json({ error: e.message });
+    };
+});
+
+app.get("/messages", async (req, res) => {
+    try {
+        const response = await db.selectTable("message_flow");
+        res.send(response);
     } catch (e) {
         res.json({ error: e.message });
     };
