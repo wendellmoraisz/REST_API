@@ -4,10 +4,10 @@
 
 - NodeJS
 - Express
-- MySql
+- MySQL
 
 ## Objetivo
-Realizar o cadastro um novo usuário com um email válido e enviar uma messagem 
+Realizar o cadastro de um novo usuário com um email válido e enviar uma messagem 
 para o seu email todos os dias no mesmo horário.
 
 ## Features
